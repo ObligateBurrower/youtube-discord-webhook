@@ -1,0 +1,23 @@
+YOUTUBE_API_KEY=APIKeyGoesHere
+
+# Either of these works; CHANNEL_ID takes priority if present
+CHANNEL_ID=TargetChannelIDGoesHere
+CHANNEL_HANDLE=@YouTubeHandle
+DISCORD_WEBHOOK_URL=https://discord.com/api/webhooks/123123/examplelink
+MENTION_ROLE_ID=RoleIDToPingGoesHere
+
+
+# for testing
+TEST_CHANNEL_ID=TestChannelIDGoesHere
+TEST_CHANNEL_HANDLE=@TestYouTubeHandle
+TEST_DISCORD_WEBHOOK_URL=https://discord.com/api/webhooks/123123/testexamplelink
+TEST_MENTION_ROLE_ID=TestRoleIDToPingGoesHere
+
+MENTION_TEXT=A new video is live!
+
+# Optional flags
+SHORT_MAX_SECONDS=180         # used as a fallback if Shorts playlist can’t be read
+INCLUDE_LIVE=false            # set true to announce livestreams
+TEST_MODE=false               # true = print instead of posting to Discord
+STATE_FILE=posted_videos.json # where we remember what was posted
+MAX_AGE_MINUTES=60
