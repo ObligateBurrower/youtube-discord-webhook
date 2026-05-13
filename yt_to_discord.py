@@ -179,7 +179,7 @@ def fetch_video_details(video_ids: list[str]) -> dict:
     return out
 
 def post_to_discord_embed(video):
-    # Mention config (TEST_MENTION_ROLE_ID/TEST_MENTION_TEXT honored automatically)
+    # Mention config
     role_id = (pick("MENTION_ROLE_ID", "") or "").strip()
     mention_text = (pick("MENTION_TEXT", "A new video is live!") or "").strip()
 
@@ -247,17 +247,17 @@ def main():
         published_at = det.get("publishedAt") or item.get("publishedAt")
         pub_dt = parse_rfc3339(published_at)
 
-        # 1) Skip Shorts by duration (<= SHORT_MAX_SECONDS)
+        # Skip Shorts by duration (<= SHORT_MAX_SECONDS)
         if duration_s <= SHORT_MAX_SECONDS:
             posted.add(vid)   # still record it so we don't see it again
             continue
 
-        # 2) Optionally skip livestream-related videos entirely
+        # Optionally skip livestream-related videos entirely
         if not INCLUDE_LIVE and is_live_related:
             posted.add(vid)
             continue
 
-        # 3) NEW: Skip if older than MAX_AGE_MINUTES, but record to state
+        # Skip if older than MAX_AGE_MINUTES, but record to state
         if pub_dt is not None:
             if datetime.now(timezone.utc) - pub_dt > timedelta(minutes=MAX_AGE_MINUTES):
                 # Too old → do not post, just mark as handled
